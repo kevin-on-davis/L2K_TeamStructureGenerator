@@ -1,233 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+      <title>Document</title>
+      <style>
+          @page {
+            margin: 0;
+          }
+         *,
+         *::after,
+         *::before {
+         box-sizing: border-box;
+         }
+         html, body {
+         padding: 0;
+         margin: 0;
+         }
+         html, body, .wrapper {
+         height: 100%;
+         }
+         .wrapper {
+         background-color: lightgray;
+         padding-top: 100px;
+         }
+         body {
+         background-color: white;
+         -webkit-print-color-adjust: exact !important;
+         font-family: 'Cabin', sans-serif;
+         }
+         main {
+         background-color: #E9EDEE;
+         height: auto;
+         padding-top: 30px;
+         }
+         h1, h2, h3, h4, h5, h6 {
+         font-family: 'BioRhyme', serif;
+         margin: 0;
+         }
+         h1 {
+         font-size: 3em;
+         }
+         h2 {
+         font-size: 2.5em;
+         }
+         h3 {
+         font-size: 2em;
+         }
+         h4 {
+         font-size: 1.5em;
+         }
+         h5 {
+         font-size: 1.3em;
+         }
+         h6 {
+         font-size: 1.2em;
+         }
+         .container {
+         padding: 50px;
+         padding-left: 100px;
+         padding-right: 100px;
+         }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
-  <title>Document</title>
-  <style>
-    @page {
-      margin: 0;
-    }
+        .photo-header img {
+         width: 200px;
+         height: 200px;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-top: -20px;
+         border: 6px solid blue;
+         box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
+         }
 
-    *,
-    *::after,
-    *::before {
-      box-sizing: border-box;
-    }
+         .row {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: space-between;
+           margin-top: 20px;
+           margin-bottom: 20px;
+         }
 
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-    }
+         .card-header {
+           padding: 20px;
+           border-radius: 6px;
+           background-color: blue;
+           color: white;
+           margin: 20px;
+         }
+         
+         .col {
+         flex: 1;
+         text-align: center;
+         }
 
-    html,
-    body,
-    .wrapper {
-      height: 100%;
-    }
+         a, a:hover {
+         text-decoration: none;
+         color: inherit;
+         font-weight: bold;
+         }
 
-    .wrapper {
-      background-color: lightgray;
-      padding-top: 100px;
-    }
+         @media print { 
+          body { 
+            zoom: .75; 
+          } 
+         }
+      </style>
+    </head>
 
-    body {
-      background-color: white;
-      -webkit-print-color-adjust: exact !important;
-      font-family: 'Cabin', sans-serif;
-    }
-
-    main {
-      background-color: #E9EDEE;
-      height: auto;
-      padding-top: 30px;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'BioRhyme', serif;
-      margin: 0;
-    }
-
-    h1 {
-      font-size: 3em;
-    }
-
-    h2 {
-      font-size: 2.5em;
-    }
-
-    h3 {
-      font-size: 2em;
-    }
-
-    h4 {
-      font-size: 1.5em;
-    }
-
-    h5 {
-      font-size: 1.3em;
-    }
-
-    h6 {
-      font-size: 1.2em;
-    }
-
-    .container {
-      padding: 50px;
-      padding-left: 100px;
-      padding-right: 100px;
-    }
-
-    .photo-header img {
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-top: -20px;
-      border: 6px solid blue;
-      box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-    .card-header {
-      padding: 20px;
-      border-radius: 6px;
-      background-color: blue;
-      color: white;
-      margin: 20px;
-    }
-
-    .col {
-      flex: 1;
-      text-align: center;
-    }
-
-    a,
-    a:hover {
-      text-decoration: none;
-      color: inherit;
-      font-weight: bold;
-    }
-
-    @media print {
-      body {
-        zoom: .75;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container" style="display:flex; flex-wrap: wrap; align-content: center; justify-content:space-around">
-    <p>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1">kevin</p>
-          <p><i class="fa fa-coffee" style="font-size:32px;color:red"></i> Manager</p>
-        </div>
-        <div style="padding:1vw">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 454</li>
-            <li class="list-group-item" style="color:blue">Email : <a href="kevin@fakemail.com">kevin@fakemail.com</a>
-            </li>
-            <li class="list-group-item">Office : <a href="">1</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1">patrick</p>
-          <p><i class="fas fa-user-graduate" style="font-size: 32px; color: white"></i> Intern</p>
-        </div>
-        <div style="padding:1vw">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 482</li>
-            <li class="list-group-item" style="color:blue">Email : <a
-                href="patrick@fakemail.com">patrick@fakemail.com</a></li>
-            <li class="list-group-item">School : <a href="#">Western</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1">linda</p>
-          <p><i class="fas fa-user-graduate" style="font-size: 32px; color: white"></i> Intern</p>
-        </div>
-        <div style="padding:1vw">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 75</li>
-            <li class="list-group-item" style="color:blue">Email : <a href="linda@fakemail.com">linda@fakemail.com</a>
-            </li>
-            <li class="list-group-item">School : <a href="#">UofT</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1">Alex</p>
-          <p><i class="fas fa-user-graduate" style="font-size: 32px; color: white"></i> Intern</p>
-        </div>
-        <div style="padding:1vw">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 284</li>
-            <li class="list-group-item">Email : <a style="color:blue" href="alex@fakemail.com">alex@fakemail.com</a>
-            </li>
-            <li class="list-group-item">School : <a href="#">UofT</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1"> idris</p>
-          <p><i class="fas fa-drafting-compass style=" font-size: 32px; color: white"></i> Engineer</p>
-        </div>
-        <div style="padding:1vw">
-          <div class="photo-header img"><img id="profilepic" class="photo-header img"
-              src="https://avatars3.githubusercontent.com/u/54820871?v=4"></div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 73</li>
-            <li class="list-group-item">Email : <a style="color:blue" href="idris@fakemail.com">idris@fakemail.com</a>
-            </li>
-            <li class="list-group-item">Github : <a style="color:blue" href="https://github.com/idrisxa">idrisxa</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="width: 18rem;">
-        <div class="card-header">
-          <p class="h1"> ruth</p>
-          <p><i class="fas fa-drafting-compass style=" font- size: 32px; color: white"></i> Engineer</p>
-        </div>
-        <div style="padding:1vw">
-          <div class="photo-header img"><img id="profilepic" class="photo-header img"
-              src="https://avatars0.githubusercontent.com/u/51419674?v=4"></div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID : 233</li>
-            <li class="list-group-item">Email : <a style="color:blue" href="ruth@fakemail.com">ruth@fakemail.com</a>
-            </li>
-            <li class="list-group-item">Github : <a style="color:blue" href="https://github.com/ruthtech">ruthtech</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </p>
-  </div>
-</body>
+    <body>
+         <div class="container" style="display:flex; flex-wrap: wrap; align-content: center; justify-content:space-around">
+    <p><div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <p class="h1">Daniel</p>
+                <p><i class="fa fa-coffee" style="font-size:32px;color:red"></i> Manager</p>
+            </div>
+            <div style = "padding:1vw">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID : 247</li>
+                <li class="list-group-item">Email : <a style="color:blue" href="daniel@fakemail.com">daniel@fakemail.com</a></li>
+                <li class="list-group-item">Office : <a href="">12</a></li>
+            </ul>
+            </div>
+        </div><div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <p class="h1">Kevin Davis</p>
+                <p><i class="fas fa-user-graduate"  style="font-size:32px; color: white"></i> Intern</p>
+            </div>
+            <div style = "padding:1vw">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID : 251</li>
+                <li class="list-group-item">Email : <a style="color:blue" href="kevin@fakemail.com">kevin@fakemail.com</a></li>
+                <li class="list-group-item">School : <a href="#">UofT School of Continuing Studies</a></li>
+            </ul>
+            </div>
+        </div>   <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <p class="h1"> Linda Federico</p>
+                            <p><i class= "fas fa-drafting-compass" style="font-size:32px; color: white" ></i> Engineer</p>
+                        </div>
+                        <div style = "padding:1vw"><div class="photo-header img"><img id="profilepic" class="photo-header img" src="https://avatars0.githubusercontent.com/u/16654350?v=4"></div><ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID : 111</li>
+                            <li class="list-group-item">Email : <a style="color:blue" href="linda@fakemail.com">linda@fakemail.com</a></li>
+                            <li class="list-group-item">Github : <a style="color:blue" href="https://github.com/lfederico">lfederico</a></li>
+                        </ul>
+                        </div>
+                    </div>   <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <p class="h1"> Idris Adebisi</p>
+                            <p><i class= "fas fa-drafting-compass" style="font-size:32px; color: white" ></i> Engineer</p>
+                        </div>
+                        <div style = "padding:1vw"><div class="photo-header img"><img id="profilepic" class="photo-header img" src="https://avatars3.githubusercontent.com/u/54820871?v=4"></div><ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID : 260</li>
+                            <li class="list-group-item">Email : <a style="color:blue" href="idris@fakemail.com">idris@fakemail.com</a></li>
+                            <li class="list-group-item">Github : <a style="color:blue" href="https://github.com/idrisxa">idrisxa</a></li>
+                        </ul>
+                        </div>
+                    </div></p>
+    </div>
+      </body>
