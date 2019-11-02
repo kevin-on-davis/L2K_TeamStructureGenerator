@@ -1,11 +1,25 @@
 const inquirer = require("inquirer");
-// const axios = require("axios");
+const axios = require("axios");
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const jest = require("jest");
+
+var fs = require("fs");
+
+
+var card_template = `<div class="card">
+    < div class="card-header" ></div >
+    <div class="card-body"><div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+    <li class="list-group-item"></li>
+  </ul>
+</div></div>
+</div >`;
 
 var lastIdUsed = 0;
 var team = [];
@@ -162,6 +176,169 @@ async function getInternInfo() {
     team.push(Intrn);
 };
 
+function teamMember(employee) {
+    if (employee.role == "Manager") {
+        return {
+            "id": employee.id,
+            "name": employee.name,
+            "email": employee.email,
+            "role": employee.role,
+            "specific_info": employee.officeNumber,
+            "link_val": "",
+            "emaillabel": "Email : ",
+            "speclabel": "Office : ",
+            "empIcon": `<i class="fa fa-coffee" style="font-size:32px;color:red"></i>`
+        };
+    }
+    else if (employee.role == "Engineer") {
+        return {
+            "id": employee.id,
+            "name": employee.name,
+            "email": employee.email,
+            "role": employee.role,
+            "specific_info": employee.github,
+            "link_val": `https://api.github.com/users/${employee.github}`,
+            "emaillabel": "Email : ",
+            "speclabel": "Github : ",
+            "empIcon": `<i class= "fas fa-drafting-compass" style="font-size:32px; color: white" ></i>`
+        };
+    }
+    else if (employee.role == "Intern") {
+        return {
+            "id": employee.id,
+            "name": employee.name,
+            "email": employee.email,
+            "role": employee.role,
+            "specific_info": employee.school,
+            "link_val": "#",
+            "emaillabel": "Email : ",
+            "speclabel": "School : ",
+            "empIcon": `<i class="fas fa-user-graduate"  style="font-size:32px; color: white"></i>`
+        };
+    }
+};
+
+function displayTeam(team_roster) {
+    return `<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+      <title>Document</title>
+      <style>
+          @page {
+            margin: 0;
+          }
+         *,
+         *::after,
+         *::before {
+         box-sizing: border-box;
+         }
+         html, body {
+         padding: 0;
+         margin: 0;
+         }
+         html, body, .wrapper {
+         height: 100%;
+         }
+         .wrapper {
+         background-color: lightgray;
+         padding-top: 100px;
+         }
+         body {
+         background-color: white;
+         -webkit-print-color-adjust: exact !important;
+         font-family: 'Cabin', sans-serif;
+         }
+         main {
+         background-color: #E9EDEE;
+         height: auto;
+         padding-top: 30px;
+         }
+         h1, h2, h3, h4, h5, h6 {
+         font-family: 'BioRhyme', serif;
+         margin: 0;
+         }
+         h1 {
+         font-size: 3em;
+         }
+         h2 {
+         font-size: 2.5em;
+         }
+         h3 {
+         font-size: 2em;
+         }
+         h4 {
+         font-size: 1.5em;
+         }
+         h5 {
+         font-size: 1.3em;
+         }
+         h6 {
+         font-size: 1.2em;
+         }
+         .container {
+         padding: 50px;
+         padding-left: 100px;
+         padding-right: 100px;
+         }
+
+        .photo-header img {
+         width: 250px;
+         height: 250px;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-top: -75px;
+         border: 6px solid blue;
+         box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
+         }
+
+         .row {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: space-between;
+           margin-top: 20px;
+           margin-bottom: 20px;
+         }
+
+         .card-header {
+           padding: 20px;
+           border-radius: 6px;
+           background-color: blue;
+           color: white;
+           margin: 20px;
+         }
+         
+         .col {
+         flex: 1;
+         text-align: center;
+         }
+
+         a, a:hover {
+         text-decoration: none;
+         color: inherit;
+         font-weight: bold;
+         }
+
+         @media print { 
+          body { 
+            zoom: .75; 
+          } 
+         }
+      </style>
+    </head>
+
+    <body>
+         <div class="container" style="display:flex; flex-wrap: wrap; align-content: center; justify-content:space-around">
+    <p>${team_roster}</p>
+    </div>
+      </body>`
+};
+
 async function build_team() {
     while (!end_condtn) {
         let part1 = "";
@@ -170,6 +347,60 @@ async function build_team() {
         let dummy_hldr = await getEmp();
     }
     console.log(team);
+
+    var team_roster = "";
+
+    team.forEach((employee) => {
+        let empObject = teamMember(employee);
+        var profilePic = "";
+        if (empObject.speclabel == "Github : ") {
+            const githubUrl = `https://api.github.com/users/${empObject.specific_info}`;
+
+            axios.get(githubUrl).then(function (bio, err) {
+                profilePic = `<div class="photo-header img"><img id="profilepic" class="photo-header img" src="${bio.data.avatar_url}"></div>`;
+                team_roster = team_roster +
+                    `   <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <p class="h1"> ${empObject.name}</p>
+                            <p>${empObject.empIcon} ${empObject.role}</p>
+                        </div>
+                        <div style = "padding:1vw">`+ profilePic +
+                    `<ul class="list-group list-group-flush">
+                            <li class="list-group-item">ID : ${empObject.id}</li>
+                            <li class="list-group-item">Email : <a href="${empObject.email}">${empObject.email}</a></li>
+                            <li class="list-group-item">${empObject.speclabel}<a href="${bio.data.html_url}">${empObject.specific_info}</a></li>
+                        </ul>
+                        </div>
+                    </div>`;
+                fs.writeFile('./index.html', displayTeam(team_roster), (err) => {
+                    if (err) throw err;
+                    console.log('The file has been saved!');
+                });
+                if (err) return console.log(err);
+            });
+        }
+        else {
+            team_roster = team_roster +
+                `<div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <p class="h1">${empObject.name}</p>
+                <p>${empObject.empIcon} ${empObject.role}</p>
+            </div>
+            <div style = "padding:1vw">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID : ${empObject.id}</li>
+                <li class="list-group-item">Email : <a href="${empObject.email}">${empObject.email}</a></li>
+                <li class="list-group-item">${empObject.speclabel}<a href="${empObject.link_val}">${empObject.specific_info}</a></li>
+            </ul>
+            </div>
+        </div>`;
+            fs.writeFile('./index.html', displayTeam(team_roster), (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+            });
+
+        }
+    });
 };
 
 build_team();
