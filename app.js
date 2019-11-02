@@ -37,7 +37,7 @@ async function getEmp() {
                 "Manager",
                 "Engineer",
                 "Intern",
-                "Terminator"
+                "Terminator - end team selection"
             ]
         }])
     if (part1.employeeRole == "Manager") {
@@ -49,10 +49,9 @@ async function getEmp() {
     else if (part1.employeeRole == "Intern") {
         let intrnObject = await getInternInfo();
     }
-    else if (part1.employeeRole == "Terminator") {
+    else if (part1.employeeRole == "Terminator - end team selection") {
         end_condtn = true;
     }
-    console.log(team);
 }
 
 
@@ -288,11 +287,11 @@ function displayTeam(team_roster) {
          }
 
         .photo-header img {
-         width: 250px;
-         height: 250px;
+         width: 200px;
+         height: 200px;
          border-radius: 50%;
          object-fit: cover;
-         margin-top: -75px;
+         margin-top: -20px;
          border: 6px solid blue;
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
@@ -346,7 +345,6 @@ async function build_team() {
         let part3 = "";
         let dummy_hldr = await getEmp();
     }
-    console.log(team);
 
     var team_roster = "";
 
@@ -367,14 +365,13 @@ async function build_team() {
                         <div style = "padding:1vw">`+ profilePic +
                     `<ul class="list-group list-group-flush">
                             <li class="list-group-item">ID : ${empObject.id}</li>
-                            <li class="list-group-item">Email : <a href="${empObject.email}">${empObject.email}</a></li>
-                            <li class="list-group-item">${empObject.speclabel}<a href="${bio.data.html_url}">${empObject.specific_info}</a></li>
+                            <li class="list-group-item">Email : <a style="color:blue" href="${empObject.email}">${empObject.email}</a></li>
+                            <li class="list-group-item">${empObject.speclabel}<a style="color:blue" href="${bio.data.html_url}">${empObject.specific_info}</a></li>
                         </ul>
                         </div>
                     </div>`;
-                fs.writeFile('./index.html', displayTeam(team_roster), (err) => {
+                fs.writeFile('./output/team.html', displayTeam(team_roster), (err) => {
                     if (err) throw err;
-                    console.log('The file has been saved!');
                 });
                 if (err) return console.log(err);
             });
@@ -389,14 +386,13 @@ async function build_team() {
             <div style = "padding:1vw">
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID : ${empObject.id}</li>
-                <li class="list-group-item">Email : <a href="${empObject.email}">${empObject.email}</a></li>
+                <li class="list-group-item">Email : <a style="color:blue" href="${empObject.email}">${empObject.email}</a></li>
                 <li class="list-group-item">${empObject.speclabel}<a href="${empObject.link_val}">${empObject.specific_info}</a></li>
             </ul>
             </div>
         </div>`;
-            fs.writeFile('./index.html', displayTeam(team_roster), (err) => {
+            fs.writeFile('./output/team.html', displayTeam(team_roster), (err) => {
                 if (err) throw err;
-                console.log('The file has been saved!');
             });
 
         }
